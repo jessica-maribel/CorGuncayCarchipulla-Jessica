@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parqueadero</title>
+    <script  type="text/javascript" src="buscarCliente.js"></script>
+    <link href="CSS/index.css" type="text/css"  rel="stylesheet" />
+</head>
+<body>
+
+    <header>
+        <div class="principal">
+            <a href="index.html"><img id="prin" src="Imagenes/icono.png"/></a>
+        </div>
+       
+        <div class="opciones">
+            <a href="addTicket.php"><img id="men" src="Imagenes/agregar.jpg" alt = ""/></a>
+            <a href="listarTic.php"><img id="men2" src="Imagenes/listar.png" /></a>
+        </div>
+    </header>
+    <hr>
+    <h1>Parqueadero</h1>
+    <hr>
+       <br>
+    <section>
+        <h2>Buscas Algun Autor?</h2>
+        <input  type="text" id="buscar" name="buscar" size="40"  placeholder="Placa Vehiculo o cedula del Cliente.... "/> 
+        <input type="submit" id="crear" name="crear" onclick="busquedaCliente()" value="Buscar">
+        <div id="informacion">
+            <h3>No se ah Buscado Nada..</h3>
+        </div>
+    </section>
+    
+
+</body>
+</html>
