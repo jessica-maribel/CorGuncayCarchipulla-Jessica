@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Libros</title>
-    <link href="CSS/listar.css" type="text/css"  rel="stylesheet" />
+    <link href="../vista/CSS/tabla.css" type="text/css"  rel="stylesheet" />
 </head>
 <body>
 <header>
@@ -16,45 +16,102 @@
             <a href="addTicket.html"><img id="men" src="Imagenes/agregar.jpg" alt = ""/></a>
             <a href="listarTic.php"><img id="men2" src="Imagenes/listar.png" /></a>
         </div>
+        
     </header>
-    
     
     <?php
     include '../../config/conexionBD.php';
-    $sql = "SELECT * FROM ticket";
+    $sql = $sql = "SELECT c.cli_cedula,c.cli_nombre,c.cli_apellido, c.cli_direccion,c.cli_telefono,
+    t.tic_cod, t.tic_fec_ing, t.tic_hor_ing, t.tic_fec_sal,t.tic_hor_sal, v.veh_placa, v.veh_marca, v.veh_modelo 
+    FROM cliente c,ticket t, vehiculo v 
+    WHERE c.cli_cod = v.veh_cli_cod and v.veh_cli_cod = t.tic_veh_cod ";
     $result = $conn->query($sql);
-   
-    if ($result->num_rows > 0) {
-       while($row = $result->fetch_assoc()) {
-           echo "<section>";
-           echo "<h2>Listado de Tickets <h2>";
-           echo "<p>".$row["tik_fec_hor_ing"]."<p>";
-           echo "<p>".$row["tik_fec_hor_sal"]."<p>";
-           $veh_cod=array_values(mysqli_fetch_array( $conn->query($sql)))[0];
-            $sqlV = "SELECT * FROM vehiculo WHERE veh_cod='$veh_cod'";
-            $resultC = $conn->query($sqlV);
-            if ($resultC->num_rows > 0) {
+
+    if ($result ) {
+        if ($result ->num_rows > 0) {
+            
+            while ($rowUs = $result->fetch_assoc()) {
+                
                 echo "<table>";
+                echo "<tr>";
+                echo "<th class='th_v'>Número de Ticket:</th>";
+                echo " <td >" . $rowUs["tic_cod"] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Fecha/Hora de Ingreso:</th>";
+                echo " <td >". $rowUs["tic_fec_ing"] ." ". $rowUs["tic_hor_ing"] ."</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Fecha/Hora de Salida:</th>";
+                echo " <td >". $rowUs["tic_fec_sal"] ." ". $rowUs["tic_hor_sal"] ."</td>";
+                echo "</tr>";
+
+
                 echo "<tr>
-                    <th>Placa</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                </tr>";
-                while($rowC = $resultC->fetch_assoc()) {
-                    $sqlC = "SELECT cli_cod FROM cliente WHERE veh_cli_cod='$veh_cod'";
-                    $resultA = $conn->query($sqlc);
-                    $rowA = $resultA->fetch_assoc();
-                    echo "<tr>";
-                    echo " <td>" . $rowC['cedula'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
+                        <th colspan='2'>Información acerca del Vehículo.</th>
+                    </tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Placa:</th>";
+                echo " <td >" . $rowUs["veh_placa"] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Marca:</th>";
+                echo " <td >" . $rowUs['veh_marca'] ."</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Modelo:</th>";
+                echo " <td >" . $rowUs['veh_modelo'] . "</td>";
+                echo "</tr>";
+                
+
+                echo "<tr>
+                        <th colspan='2'>Información acerca del Cliente.</th>
+                    </tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Cédula:</th>";
+                echo " <td >" . $rowUs["cli_cedula"] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Nombres:</th>";
+                echo " <td >" . $rowUs['cli_nombre'] ."</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th class='th_v'>Nombres:</th>";
+                echo " <td >" . $rowUs['cli_apellido'] ."</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Dirección:</th>";
+                echo " <td >" . $rowUs['cli_direccion'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th class='th_v'>Teléfono:</th>";
+                echo " <td >" . $rowUs['cli_telefono'] . "</td>";
+                echo "</tr>";
+                echo "<tr>";
+
+                echo "<hr>";
+                echo "<h2>Informacion Ticket</h2>";
+                echo "<hr>";
             }
+        
+        } else {
+            echo "<tr>";
+            echo "<td colspan='1'> No existen tickets con ese cliente y vehiculo.</td>";
+        }
 
-
-           echo "</section>";
-          }
-       }
+    } else {
+        echo " <tr><td colspan='1'>Error: " . mysqli_error($conn) . "</td></tr>";
+        echo "</tr>";
+    }
     $conn->close(); 
      ?>
 </body>

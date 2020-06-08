@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Cliente</title>
@@ -20,10 +20,10 @@
  echo " <table style='width:60%'>
  <tr>
  <th>Cedula </th>
- <th>Nombre </th>
- <th>Apellid</th>
+ <th>Nombres  </th>
+ <th>Apellidos </th>
  <th>Direccion </th>
- <th>Telefono</th>
+ <th>Telefono </th>
  </tr>";
  if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

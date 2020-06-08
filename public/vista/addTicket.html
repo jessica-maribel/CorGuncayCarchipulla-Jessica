@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <link href="CSS/ticket.css" type="text/css"  rel="stylesheet" />
@@ -23,25 +23,10 @@
 
 <label for="cedula">Bucar Cedula (*)</label>
 <br>
-<input type="text" id="cedula" name="cedula" value="" onkeyup="return validarCedula(this)"  placeholder="Ingrese el número de cedula ..."/>
+<input type="text" id="cedula" name="cedula" value="" placeholder="Ingrese el número de cedula ..."/>
 <span id="mensajeCedula" class="error"></span>
 
 <br>
-
-<label for="fec_hor_ing">Fecha y hora de ingreso (*)</label>
-<br>
-<input type="datetime" id="fec_hor_ing" name="fec_hor_ing" value="<?php echo date('Y-m-d\TH-i');?>" />
-<span id="" class="error"></span>
-<br>
-
-
-
-<label for="fec_hor_sal">Fecha y hora de salida (*)</label>
-<br>
-<input type="datetime" id="fec_hor_sal" name="fec_hor_sal" value="<?php echo date('Y-m-d\TH-i');?>" />
-<span id="" class="error"></span>
-<br>
-
 
 <label for="placa">Placa del Vehiculo (*)</label>
 <br>
@@ -58,7 +43,29 @@
 <label for="modelo">Modelo del Vehiculo (*)</label>
 <br>
 <input type="text" id="modelo"  name="modelo" value="" placeholder="Ingrese el modelo del Vehiculo..." />
+<br>
+<label for="fec_ing">Fecha y hora de ingreso (*)</label>
+<br>
+<input type="date" id="fec_ing" name="fec_ing" />
+<span id="" class="error"></span>
+<br>
 
+<label for="fec_hor_ing">Fecha y hora de ingreso (*)</label>
+<br>
+<input type="time" id="hor_ing" name="hor_ing"/>
+<span id="" class="error"></span>
+<br>
+
+<label for="fec_sal">Fecha y hora de salida (*)</label>
+<br>
+<input type="date" id="fec_sal" name="fec_sal"  />
+<span id="" class="error"></span>
+<br>
+
+<label for="hor_sal">Fecha y hora de salida (*)</label>
+<br>
+<input type="time" id="hor_sal" name="hor_sal"  />
+<span id="" class="error"></span>
 <br>
 
 <button type="submit" id="crear" name="crear" onclick="botonSubmit()" value="Aceptar">Aceptar </button>
